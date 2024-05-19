@@ -58,6 +58,7 @@ clearButton.addEventListener("click", () => {
     grid.innerHTML = "";
     createGrid(gridSize);
 })
+
 //Initial Grid 
 createGrid(gridSize);
 
