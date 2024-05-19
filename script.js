@@ -12,6 +12,7 @@ body.addEventListener("mouseup", () => {
     console.log("mouse is up")
 })
 
+let squareColor = "black";
 const grid = document.querySelector(".grid"); 
 function createGrid(size){
     for (let i = 0; i < size; i++){
@@ -21,9 +22,11 @@ function createGrid(size){
             let square = document.createElement("div");
             square.className = "square";
             rowDiv.appendChild(square);
+            let colored = false; 
             square.addEventListener("mousemove", () => {
                 if (isDown == true){
-                    square.style.backgroundColor = "black";
+                    square.style.backgroundColor = squareColor;
+                    colored = true; 
                 }
             })
         }
@@ -31,17 +34,31 @@ function createGrid(size){
     }
 }
 
-
-const button = document.querySelector("button");
-button.addEventListener("click", () => {
-    let newSize = prompt("What size do you want the cell to be? ");
-    while (newSize > 100 || newSize < 0){
-        newSize = prompt("Invalid Number, What size do you want the cell to be? ");
+let gridSize = 12;
+const setSizeButton = document.querySelector(".set-size");
+setSizeButton.addEventListener("click", () => {
+    gridSize = prompt("What size do you want the cell to be? (Default is 12) ");
+    while (gridSize > 100 || gridSize < 0){
+        gridSize = prompt("Invalid Number, What size do you want the cell to be? ");
     }
     //remove previous grid 
     grid.innerHTML = "";
-    createGrid(newSize);
+    createGrid(gridSize);
 })
 
+
+const customButton = document.querySelector(".custom");
+customButton.addEventListener("click", () => {
+    let color = prompt("What color would you like to choose? ")
+    squareColor = color.toLowerCase();
+})
+
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener("click", () => {
+    grid.innerHTML = "";
+    createGrid(gridSize);
+})
 //Initial Grid 
-createGrid(50);
+createGrid(gridSize);
+
+
